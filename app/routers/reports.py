@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from .. import models, schemas
 from ..database import get_db
 
+from ..routers.auth import get_current_user
+
 router = APIRouter(prefix="/reports", tags=["reports"])
 
 
@@ -33,7 +35,6 @@ def create_report(payload: schemas.AnalyticsReportCreate, db: Session = Depends(
     db.refresh(report)
     return report
 
-
-@router.get("/", response_model=list[schemas.AnalyticsReportRead])
-def list_reports(db: Session = Depends(get_db)):
-    return db.query(models.AnalyticsReport).all()
+@router.get("/", response_model=list[schemas.CampaignRead])
+def list_campaigns(db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return db.query(models.Campaign).all()

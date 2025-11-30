@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from .. import models, schemas
 from ..database import get_db
-
+from ..routers.auth import get_current_user
 router = APIRouter(prefix="/channels", tags=["channels"])
 
 
@@ -16,6 +16,6 @@ def create_channel(payload: schemas.ChannelCreate, db: Session = Depends(get_db)
     return channel
 
 
-@router.get("/", response_model=list[schemas.ChannelRead])
-def list_channels(db: Session = Depends(get_db)):
-    return db.query(models.Channel).all()
+@router.get("/", response_model=list[schemas.CampaignRead])
+def list_campaigns(db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return db.query(models.Campaign).all()

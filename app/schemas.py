@@ -92,3 +92,92 @@ class AnalyticsReportRead(AnalyticsReportBase):
 
     class Config:
         orm_mode = True
+
+
+# user
+class UserBase(BaseModel):
+    username: str
+    full_name: Optional[str] = None
+
+
+class UserCreate(UserBase):
+    password: str
+
+
+class UserRead(UserBase):
+    user_id: int
+
+    class Config:
+        orm_mode = True
+
+class CampaignLinkBase(BaseModel):
+    campaign_id: int
+    url_original: str
+    url_short: Optional[str] = None
+    utm: Optional[str] = None
+
+
+class CampaignLinkCreate(CampaignLinkBase):
+    pass
+
+
+class CampaignLinkRead(CampaignLinkBase):
+    link_id: int
+
+    model_config = {
+        "from_attributes": True
+    }
+
+class PostBase(BaseModel):
+    channel_id: int
+    external_id: Optional[str] = None
+    url: Optional[str] = None
+    posted_at: Optional[datetime] = None
+    caption: Optional[str] = None
+    media_type: Optional[str] = None
+
+
+class PostCreate(PostBase):
+    pass
+
+
+class PostRead(PostBase):
+    post_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class GoalBase(BaseModel):
+    campaign_id: int
+    name: str
+    kpi: str
+    target_value: Optional[float] = None
+    period: Optional[str] = None
+
+
+class GoalCreate(GoalBase):
+    pass
+
+
+class GoalRead(GoalBase):
+    goal_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class DashboardBase(BaseModel):
+    org_id: Optional[str] = None
+    name: str
+    layout: Optional[str] = None
+
+
+class DashboardCreate(DashboardBase):
+    pass
+
+
+class DashboardRead(DashboardBase):
+    dashboard_id: int
+    class Config:
+        orm_mode = True

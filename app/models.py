@@ -111,3 +111,12 @@ class Dashboard(Base):
     org_id = Column(String, nullable=True)
     name = Column(String, nullable=False)
     layout = Column(Text, nullable=True)
+
+class User(Base):
+    __tablename__ = "users"
+
+    user_id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False)
+    full_name = Column(String, nullable=True)
+    hashed_password = Column(String, nullable=False)
+    is_active = Column(Integer, default=1)

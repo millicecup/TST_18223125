@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from .. import models, schemas
 from ..database import get_db
-
+from ..routers.auth import get_current_user
 router = APIRouter(prefix="/campaigns", tags=["campaigns"])
 
 
@@ -17,7 +17,7 @@ def create_campaign(payload: schemas.CampaignCreate, db: Session = Depends(get_d
 
 
 @router.get("/", response_model=list[schemas.CampaignRead])
-def list_campaigns(db: Session = Depends(get_db)):
+def list_campaigns(db: Session = Depends(get_db), user=Depends(get_current_user)):
     return db.query(models.Campaign).all()
 
 
