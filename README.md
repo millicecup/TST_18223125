@@ -12,3 +12,10 @@
 Choose the command that matches your project type and files:
 
 `uvicorn app.main:app --reload`
+
+3. Open browser with subdomain :
+
+| Path    | Description          |
+| ------- | -------------------- |
+| `/docs` | Swagger UI (OpenAPI) |
+
