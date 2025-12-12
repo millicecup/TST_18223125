@@ -1,5 +1,9 @@
 # TST_18223125
 
+## Online site :
+`https://learnova125.vercel.app/docs`
+untuk endpoint silahkan merujuk ke nomor _3_
+
 ## Installation
 1. Clone or copy the project:
     - git clone <repo-url>
